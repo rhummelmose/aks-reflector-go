@@ -11,11 +11,12 @@
             "mode": "auto",
             "program": "${fileDirname}",
             "env": {
-                "AW_SP_USERNAME": "",
-                "AW_SP_PASSWORD": "",
-                "AW_AZURE_AD_TENANT": "",
-                "AW_RESOURCE_GROUP": "",
-                "AW_AKS_CLUSTER_NAME": ""
+                "AWGO_SP_USERNAME": "",
+                "AWGO_SP_PASSWORD": "",
+                "AWGO_AZURE_AD_TENANT": "",
+                "AWGO_RESOURCE_GROUP": "",
+                "AWGO_AKS_CLUSTER_NAME": "",
+                "AWGO_LISTENING_PORT": ""
             },
             "args": []
         }

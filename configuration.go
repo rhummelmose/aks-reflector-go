@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"strconv"
 	"os"
 )
 
@@ -11,15 +13,21 @@ type Configuration struct {
 	AzureADTenant			 string
 	ResourceGroup            string
 	AKSClusterName           string
+	ListeningPort            int
 }
 
 // NewConfigurationFromEnv returns a configuration object built by retrieving values from env
 func NewConfigurationFromEnv() Configuration {
 	var configuration Configuration
-	configuration.ServicePrincipalUsername = os.Getenv("AW_SP_USERNAME")
-	configuration.ServicePrincipalPassword = os.Getenv("AW_SP_PASSWORD")
-	configuration.AzureADTenant = os.Getenv("AW_AZURE_AD_TENANT")
-	configuration.ResourceGroup = os.Getenv("AW_RESOURCE_GROUP")
-	configuration.AKSClusterName = os.Getenv("AW_AKS_CLUSTER_NAME")
+	configuration.ServicePrincipalUsername = os.Getenv("AWGO_SP_USERNAME")
+	configuration.ServicePrincipalPassword = os.Getenv("AWGO_SP_PASSWORD")
+	configuration.AzureADTenant = os.Getenv("AWGO_AZURE_AD_TENANT")
+	configuration.ResourceGroup = os.Getenv("AWGO_RESOURCE_GROUP")
+	configuration.AKSClusterName = os.Getenv("AWGO_AKS_CLUSTER_NAME")
+	listeningPort, listeningPortErr := strconv.Atoi(os.Getenv("AWGO_LISTENING_PORT"))
+	if listeningPortErr != nil {
+		log.Fatal(listeningPortErr)
+	}
+	configuration.ListeningPort = listeningPort
 	return configuration
 }

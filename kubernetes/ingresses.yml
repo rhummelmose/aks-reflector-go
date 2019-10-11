@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: aks-reflector-go-ingress
+  labels:
+    app: aks-reflector
+    tier: backend
+spec:
+  rules:
+  - host: lightning-talk-oct-2019-cloud-native-gbb.cloudnativegbb.com
+    http:
+      paths:
+      - path: /aks-reflector/backend
+        backend:
+          serviceName: aks-reflector-go-service
+          servicePort: 80

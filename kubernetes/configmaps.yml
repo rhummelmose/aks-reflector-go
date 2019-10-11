@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aks-reflector-config
+  labels:
+    app: aks-reflector
+data:
+  sp-username: "{AW_SP_USERNAME}"
+  azure-ad-tenant: "{AW_AZURE_AD_TENANT}"
+  resource-group: "{AW_RESOURCE_GROUP}"
+  aks-cluster-name: "{AW_AKS_CLUSTER_NAME}"
+  listening-port: "{AW_LISTENING_PORT}"

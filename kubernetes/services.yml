@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-reflector-go-service
+  labels:
+    app: aks-reflector
+    tier: backend
+spec:
+  selector:
+    app: aks-reflector
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 80
+  type: ClusterIP

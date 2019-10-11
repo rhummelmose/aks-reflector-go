@@ -3,6 +3,6 @@ package main
 func main() {
 	configuration := NewConfigurationFromEnv()
 	terminalBridge := NewTerminalBridge(configuration)
-	requestHandler := NewRequestHandler(terminalBridge)
+	requestHandler := NewRequestHandler(configuration, terminalBridge)
 	requestHandler.HandleRequests()
 }
