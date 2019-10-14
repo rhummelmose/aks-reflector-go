@@ -39,6 +39,8 @@ stages:
     - task: Bash@3
       inputs:
         filePath: "scripts/tokenize.sh"
+        env:
+          ARGO_SP_PASSWORD: $(ARGO_SP_PASSWORD)
     - task: Kubernetes@1
       displayName: kubectl apply
       inputs:
