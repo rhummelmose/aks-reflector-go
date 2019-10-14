@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Debugging
-if [ -n TOKENIZE_DEBUG ]; then
+if [ -n $TOKENIZE_DEBUG ]; then
     ARGO_SP_USERNAME=debug_username
     ARGO_AZURE_AD_TENANT=debug_tenant
     ARGO_RESOURCE_GROUP=debug_resource_group
@@ -11,12 +11,12 @@ if [ -n TOKENIZE_DEBUG ]; then
     AZDEV_BUILD_SOURCE_VERSION=debug_azdev_build_source_version
 fi
 
-# Install pre-reqs
+# Install pre-reqs (requires snap)
 install_prereqs() {
     local yq_installed
-    yq --version > /dev/null
+    yq --version > /dev/null 2>&1
     yq_installed=$?
-    if [ yq_installed -ne 0 ]; then
+    if [ $yq_installed -ne 0 ]; then
         sudo snap install yq
     fi
 }
