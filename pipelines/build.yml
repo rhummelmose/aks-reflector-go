@@ -5,14 +5,16 @@ resources:
 - repo: self
 
 variables:
-  tag: "$(Build.SourceVersion)"
+- group: "aks-reflector-go"
+- name: "azure-arm-service-connection"
+  value: "azure-devops-arm-service-connection"
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: BuildPush
+  displayName: Build and push image
   jobs:  
-  - job: Build
-    displayName: Build
+  - job: BuildPush
+    displayName: Build and push image
     pool:
       vmImage: "ubuntu-latest"
     steps:
@@ -24,3 +26,23 @@ stages:
         repository: aks-reflector-go
         tags: |
           $(tag)
+- stage: Deploy
+  displayName: Deploy to K8s
+  jobs:
+  - job: Deploy
+    displayName: Deploy to K8s
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - task: Bash@3
+      inputs:
+        filePath: "scripts/tokenize.sh"
+    - task: Kubernetes@1
+      displayName: kubectl apply
+      inputs:
+        connectionType: Azure Resource Manager
+        azureSubscriptionEndpoint: $(azure-arm-service-connection)
+        azureResourceGroup: $(ARGO_RESOURCE_GROUP)
+        kubernetesCluster: $(ARGO_AKS_CLUSTER_NAME)
+        command: apply
+        arguments: -f kubernetes/configmaps.yaml | -f kubernetes/secrets.yml | -f kubernetes/deployments.yml | -f kubernetes/services.yml | -f kubernetes/ingresses.yml
