@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Debugging
-if [ -n $TOKENIZE_DEBUG ]; then
+if [ ! -z $TOKENIZE_DEBUG ]; then
     echo "Setting debugging variables.."
     ARGO_SP_USERNAME=debug_username
     ARGO_AZURE_AD_TENANT=debug_tenant
