@@ -1,12 +1,23 @@
 #!/bin/bash
 
+# Debugging
+if [ -n TOKENIZE_DEBUG ]; then
+    ARGO_SP_USERNAME=debug_username
+    ARGO_AZURE_AD_TENANT=debug_tenant
+    ARGO_RESOURCE_GROUP=debug_resource_group
+    ARGO_AKS_CLUSTER_NAME=debug_aks_cluster_name
+    ARGO_LISTENING_PORT=debug_listening_port
+    ARGO_SP_PASSWORD=debug_password
+    AZDEV_BUILD_SOURCE_VERSION=debug_azdev_build_source_version
+fi
+
 # Install pre-reqs
 install_prereqs() {
     local yq_installed
     yq --version > /dev/null
     yq_installed=$?
     if [ yq_installed -ne 0 ]; then
-        apt-get install yq
+        sudo snap install yq
     fi
 }
 
