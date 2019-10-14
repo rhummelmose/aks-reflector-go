@@ -8,6 +8,8 @@ variables:
 - group: "aks-reflector-go"
 - name: "azure-arm-service-connection"
   value: "azure-devops-arm-service-connection"
+- name: "AZDEV_BUILD_SOURCE_VERSION"
+  value: $(Build.SourceVersion)
 
 stages:
 - stage: BuildPush
@@ -25,7 +27,7 @@ stages:
         containerRegistry: azure-devops-acr-service-connection
         repository: aks-reflector-go
         tags: |
-          $(tag)
+          $(AZDEV_BUILD_SOURCE_VERSION)
 - stage: Deploy
   displayName: Deploy to K8s
   jobs:
