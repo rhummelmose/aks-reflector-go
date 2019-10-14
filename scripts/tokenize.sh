@@ -12,6 +12,18 @@ if [ ! -z $TOKENIZE_DEBUG ]; then
     AZDEV_BUILD_SOURCE_VERSION=debug_azdev_build_source_version
 fi
 
+# Validate required variables
+if [ -z $ARGO_SP_USERNAME ] || \
+   [ -z $ARGO_AZURE_AD_TENANT ] || \
+   [ -z $ARGO_RESOURCE_GROUP ] || \
+   [ -z $ARGO_AKS_CLUSTER_NAME ] || \
+   [ -z $ARGO_LISTENING_PORT ] || \
+   [ -z $ARGO_SP_PASSWORD ] || \
+   [ -z $AZDEV_BUILD_SOURCE_VERSION ]; then
+    echo "Required variables missing from env.."
+    exit 1
+fi
+
 # Install pre-reqs (requires snap)
 install_prereqs() {
     local yq_installed
