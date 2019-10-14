@@ -21,6 +21,17 @@ if [ -z $ARGO_SP_USERNAME ] || \
    [ -z $ARGO_SP_PASSWORD ] || \
    [ -z $AZDEV_BUILD_SOURCE_VERSION ]; then
     echo "Required variables missing from env.."
+    printf "ARGO_SP_USERNAME: %s" $ARGO_SP_USERNAME
+    printf "ARGO_AZURE_AD_TENANT: %s" $ARGO_AZURE_AD_TENANT
+    printf "ARGO_RESOURCE_GROUP: %s" $ARGO_RESOURCE_GROUP
+    printf "ARGO_AKS_CLUSTER_NAME: %s" $ARGO_AKS_CLUSTER_NAME
+    printf "ARGO_LISTENING_PORT: %s" $ARGO_LISTENING_PORT
+    printf "AZDEV_BUILD_SOURCE_VERSION: %s" $AZDEV_BUILD_SOURCE_VERSION
+    if [ -z $ARGO_SP_PASSWORD ]; then
+        echo "ARGO_SP_PASSWORD: *****"
+    else
+        echo "ARGO_SP_PASSWORD: <empty>"
+    fi
     exit 1
 fi
 
