@@ -11,5 +11,5 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 80
+      port: 80 # {ARGO_LISTENING_PORT}
   type: ClusterIP

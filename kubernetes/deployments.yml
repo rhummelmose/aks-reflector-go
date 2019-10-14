@@ -21,34 +21,34 @@ spec:
       - name: aks-reflector-go
         image: cloudnativegbb.azurecr.io/aks-reflector-go
         ports:
-        - containerPort: 80 # {AWGO_LISTENING_PORT}
+        - containerPort: 80 # {ARGO_LISTENING_PORT}
         env:
-        - name: AWGO_SP_USERNAME
+        - name: ARGO_SP_USERNAME
           valueFrom:
             configMapKeyRef:
               name: aks-reflector-config
               key: sp-username
-        - name: AWGO_AZURE_AD_TENANT
+        - name: ARGO_AZURE_AD_TENANT
           valueFrom:
             configMapKeyRef:
               name: aks-reflector-config
               key: azure-ad-tenant
-        - name: AWGO_RESOURCE_GROUP
+        - name: ARGO_RESOURCE_GROUP
           valueFrom:
             configMapKeyRef:
               name: aks-reflector-config
               key: resource-group
-        - name: AWGO_AKS_CLUSTER_NAME
+        - name: ARGO_AKS_CLUSTER_NAME
           valueFrom:
             configMapKeyRef:
               name: aks-reflector-config
               key: aks-cluster-name
-        - name: AWGO_LISTENING_PORT
+        - name: ARGO_LISTENING_PORT
           valueFrom:
             configMapKeyRef:
               name: aks-reflector-config
               key: listening-port
-        - name: AWGO_SP_PASSWORD
+        - name: ARGO_SP_PASSWORD
           valueFrom:
             secretKeyRef:
               name: aks-reflector-secret

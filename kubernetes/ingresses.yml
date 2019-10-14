@@ -7,10 +7,10 @@ metadata:
     tier: backend
 spec:
   rules:
-  - host: lightning-talk-oct-2019-cloud-native-gbb.cloudnativegbb.com
+  - host: lightning-talk-oct-2019.cloudnativegbb.com
     http:
       paths:
       - path: /aks-reflector/backend
         backend:
           serviceName: aks-reflector-go-service
-          servicePort: 80
+          servicePort: 80 # {ARGO_LISTENING_PORT}
