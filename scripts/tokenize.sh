@@ -2,6 +2,7 @@
 
 # Debugging
 if [ -n $TOKENIZE_DEBUG ]; then
+    echo "Setting debugging variables.."
     ARGO_SP_USERNAME=debug_username
     ARGO_AZURE_AD_TENANT=debug_tenant
     ARGO_RESOURCE_GROUP=debug_resource_group
@@ -58,9 +59,9 @@ container_image="${image_name}:${image_tag}"
 label_source_version="source_version"
 yq w --inplace kubernetes/deployments.yml "spec.template.spec.containers[0].image" "$container_image"
 yq w --inplace kubernetes/deployments.yml "spec.template.spec.containers[0].ports[0].containerPort" "$ARGO_LISTENING_PORT"
-yq w --inplace kubernetes/deployments.yml "metadata.labels[label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
-yq w --inplace kubernetes/deployments.yml "spec.selector.matchLabels[label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
-yq w --inplace kubernetes/deployments.yml "spec.template.metadata.labels[label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
+yq w --inplace kubernetes/deployments.yml "metadata.labels[$label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
+yq w --inplace kubernetes/deployments.yml "spec.selector.matchLabels[$label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
+yq w --inplace kubernetes/deployments.yml "spec.template.metadata.labels[$label_source_version]" "$AZDEV_BUILD_SOURCE_VERSION"
 
 # services.yml
 yq w --inplace kubernetes/services.yml "spec.ports[0].port" "$ARGO_LISTENING_PORT"
