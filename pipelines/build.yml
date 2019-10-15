@@ -45,5 +45,5 @@ stages:
       displayName: Azure CLI
       inputs:
         azureSubscription: $(azure-arm-service-connection)
-        scriptType: Shell
+        scriptType: bash
         scriptLocation: scripts/deploy.sh
