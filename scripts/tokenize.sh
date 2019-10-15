@@ -73,7 +73,7 @@ yq w --inplace kubernetes/configmaps.yml "data.aks-cluster-name" "\"$ARGO_AKS_CL
 yq w --inplace kubernetes/configmaps.yml "data.listening-port" "\"$ARGO_LISTENING_PORT\""
 
 # secrets.yml
-yq w --inplace kubernetes/secrets.yml "data.sp-password" "\"$ARGO_SP_PASSWORD\""
+yq w --inplace kubernetes/secrets.yml "data.sp-password" "\"$(printf '%s' $ARGO_SP_PASSWORD | base64)\""
 
 #deployments.yml
 image_name=$(yq r kubernetes/deployments.yml "spec.template.spec.containers[0].image")
