@@ -46,4 +46,4 @@ stages:
       inputs:
         azureSubscription: $(azure-arm-service-connection)
         scriptType: bash
-        scriptLocation: scripts/deploy.sh
+        scriptPath: scripts/deploy.sh
