@@ -41,12 +41,9 @@ stages:
         filePath: "scripts/tokenize.sh"
       env:
         ARGO_SP_PASSWORD: $(ARGO_SP_PASSWORD)
-    - task: Kubernetes@1
-      displayName: kubectl apply
+    - task: AzureCLI@2
+      displayName: Azure CLI
       inputs:
-        connectionType: Azure Resource Manager
-        azureSubscriptionEndpoint: $(azure-arm-service-connection)
-        azureResourceGroup: $(ARGO_RESOURCE_GROUP)
-        kubernetesCluster: $(ARGO_AKS_CLUSTER_NAME)
-        command: apply
-        arguments: -f kubernetes/configmaps.yaml | -f kubernetes/secrets.yml | -f kubernetes/deployments.yml | -f kubernetes/services.yml | -f kubernetes/ingresses.yml
+        azureSubscription: $(azure-arm-service-connection)
+        scriptType: Shell
+        scriptLocation: scripts/deploy.sh
