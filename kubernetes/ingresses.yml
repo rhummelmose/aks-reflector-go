@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: aks-reflector-go-ingress
@@ -13,4 +13,4 @@ spec:
       - path: /aks-reflector/backend
         backend:
           serviceName: aks-reflector-go-service
-          servicePort: 80 # {ARGO_LISTENING_PORT}
+          servicePort: "80" # {ARGO_LISTENING_PORT}
