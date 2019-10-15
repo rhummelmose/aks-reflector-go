@@ -13,4 +13,4 @@ spec:
       - path: /aks-reflector/backend
         backend:
           serviceName: aks-reflector-go-service
-          servicePort: "80" # {ARGO_LISTENING_PORT}
+          servicePort: 80 # {ARGO_LISTENING_PORT}

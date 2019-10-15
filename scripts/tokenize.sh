@@ -81,13 +81,13 @@ image_tag="$AZDEV_BUILD_SOURCE_VERSION"
 container_image="${image_name}:${image_tag}"
 label_source_version="source_version"
 yq w --inplace kubernetes/deployments.yml "spec.template.spec.containers[0].image" "\"$container_image\""
-yq w --inplace kubernetes/deployments.yml "spec.template.spec.containers[0].ports[0].containerPort" "\"$ARGO_LISTENING_PORT\""
+yq w --inplace kubernetes/deployments.yml "spec.template.spec.containers[0].ports[0].containerPort" "$ARGO_LISTENING_PORT"
 yq w --inplace kubernetes/deployments.yml "metadata.labels[$label_source_version]" "\"$AZDEV_BUILD_SOURCE_VERSION\""
 yq w --inplace kubernetes/deployments.yml "spec.selector.matchLabels[$label_source_version]" "\"$AZDEV_BUILD_SOURCE_VERSION\""
 yq w --inplace kubernetes/deployments.yml "spec.template.metadata.labels[$label_source_version]" "\"$AZDEV_BUILD_SOURCE_VERSION\""
 
 # services.yml
-yq w --inplace kubernetes/services.yml "spec.ports[0].port" "$ARGO_LISTENING_PORT"
+yq w --inplace kubernetes/services.yml "spec.ports[0].port" $ARGO_LISTENING_PORT
 
 # ingresses.yml
-yq w --inplace kubernetes/ingresses.yml "spec.rules[0].http.paths[0].backend.servicePort" "\"$ARGO_LISTENING_PORT\""
+yq w --inplace kubernetes/ingresses.yml "spec.rules[0].http.paths[0].backend.servicePort" "$ARGO_LISTENING_PORT"
