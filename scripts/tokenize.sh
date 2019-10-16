@@ -75,7 +75,7 @@ yq w --inplace kubernetes/configmaps.yml "data.listening-port" "\"$ARGO_LISTENIN
 # secrets.yml
 yq w --inplace kubernetes/secrets.yml "data.sp-password" "\"$(printf '%s' $ARGO_SP_PASSWORD | base64)\""
 
-#deployments.yml
+# deployments.yml
 image_name=$(yq r kubernetes/deployments.yml "spec.template.spec.containers[0].image")
 image_tag="$AZDEV_BUILD_SOURCE_VERSION"
 container_image="${image_name}:${image_tag}"
